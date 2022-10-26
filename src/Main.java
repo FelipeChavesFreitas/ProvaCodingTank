@@ -1,4 +1,3 @@
-import java.sql.SQLOutput;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -23,13 +22,17 @@ public class Main {
             array[j] = valor;
             j++;
         }
-        System.out.println("Qual média vc quer fazer?\n1= Harmonica e 2= Aritmética");
-        int tipoDeMedia = pegarNumero(entrada);
-        while (tipoDeMedia != 1 && tipoDeMedia != 2){
-            System.out.println("Número de escolha inválido, você apenas pode escolhere entre os números 1(Média Harmonica) e 2(Média Artimética).\nDigite novamente: ");
-            tipoDeMedia = pegarNumero(entrada);
+        System.out.println("Qual média vc quer fazer?\nHarmonica(digite HARMONICA) ou Aritmética(digite ARITMETICA)");
+        String tipoDeMedia;
+        tipoDeMedia = pegarMedia(entrada);
+        if (tipoDeMedia.equals("")){
+            tipoDeMedia = pegarMedia(entrada);
         }
-        if (tipoDeMedia == 1){
+        while (!tipoDeMedia.equals("HARMONICA")&& !tipoDeMedia.equals("ARITMETICA")){
+            System.out.println("Escolha inválida, você apenas pode escolher entre HARMONICA (para calculcar Média Harmonica) e ARITMETICA (para calcular Média Artimética).\nDigite novamente sua escolha: ");
+            tipoDeMedia = pegarMedia(entrada);
+        }
+        if (tipoDeMedia.equals("HARMONICA")){
             double mediaHarmonicaMeio = 0;
             for (j = 0; j < array.length; j++) {
                 double mediaHarmonicaComeco = (1/array[j]);
@@ -40,9 +43,9 @@ public class Main {
             System.out.println("As notas digitadas foram: ");
             for (j = 0; j < array.length; j++) {
                 System.out.print(" |" + array[j] + "|");}
-            System.out.printf("\nA média aritmética entre as notas é de: %.2f", mediaHarmonicaFinal);
+            System.out.printf("\nA média harmonica entre as notas é de: %.2f", mediaHarmonicaFinal);
         }
-        else if (tipoDeMedia == 2) {
+        else if (tipoDeMedia.equals("ARITMETICA")) {
             double mediaAritmetica = soma / i;
             System.out.println("A média escolhida foi: ARITMÉTICA");
             System.out.println("As notas digitadas foram: ");
@@ -76,6 +79,19 @@ public class Main {
             input.nextLine();
             System.out.println("Valor não foi computado por conta de um erro :(");
             return getNumeroDouble(input);
+        }
+    }
+    static String pegarMedia(Scanner input) {
+        try {
+            return input.nextLine();
+        } catch (InputMismatchException | NumberFormatException e) {
+            input.nextLine();
+            System.out.println("Escolha inválida.\nDigite novamente:");
+            return pegarMedia(input);
+        } catch (Exception e) {
+            input.nextLine();
+            System.out.println("Escolha não foi computada por conta de um erro :(");
+            return pegarMedia(input);
         }
     }
 }
