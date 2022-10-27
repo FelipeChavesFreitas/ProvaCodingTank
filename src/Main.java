@@ -4,6 +4,7 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner entrada = new Scanner(System.in);
+        System.out.println("===CALCULADORA DE MÉDIA ARITMÉTICA OU HARMONICA===");
         System.out.println("Bem vindo ao sistema :)");
         System.out.println("Digite a quantidade de números utilizados: ");
         int quantidade = pegarNumero(entrada);
@@ -14,22 +15,24 @@ public class Main {
         double soma = 0;
         int i = 0;
         int j = 0;
+        int qntvalor = 1;
         double[] array = new double[quantidade];
         for (i = 0; i < array.length; i++) {
-            System.out.println("Digite um valor: ");
+            System.out.printf("Digite o valor %d: ", qntvalor);
             double valor = getNumeroDouble(entrada);
             soma += valor;
             array[j] = valor;
             j++;
+            qntvalor++;
         }
-        System.out.println("Qual média vc quer fazer?\nHarmonica(digite HARMONICA) ou Aritmética(digite ARITMETICA)");
+        System.out.println("Qual média você quer realizar?\nPara Harmonica digite: HARMONICA| Para Aritmética digite: ARITMETICA");
         String tipoDeMedia;
         tipoDeMedia = pegarMedia(entrada);
         if (tipoDeMedia.equals("")){
             tipoDeMedia = pegarMedia(entrada);
         }
         while (!tipoDeMedia.equals("HARMONICA")&& !tipoDeMedia.equals("ARITMETICA")){
-            System.out.println("Escolha inválida, você apenas pode escolher entre HARMONICA (para calculcar Média Harmonica) e ARITMETICA (para calcular Média Artimética).\nDigite novamente sua escolha: ");
+            System.out.println("Escolha inválida, você apenas pode escolher entre HARMONICA (para calcular Média Harmonica) e ARITMETICA (para calcular Média Artimética).\nDigite novamente sua escolha: ");
             tipoDeMedia = pegarMedia(entrada);
         }
         if (tipoDeMedia.equals("HARMONICA")){
